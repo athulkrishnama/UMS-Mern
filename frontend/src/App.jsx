@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./store/store";
+import Signup from "./Components/Signup/Signup";
 function App() {
   
   const router = createBrowserRouter([
@@ -10,7 +11,7 @@ function App() {
     },
     {
       path: "/signup",
-      element: <></>,
+      element: <Signup/>,
     },
   ]);
   return (

@@ -2,6 +2,7 @@ const express = require('express')
 require ('dotenv').config()
 const userRouter = require('./routes/userRoute');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 // connnecting with mongodb
 mongoose.connect(process.env.MONGODB_URL).then(()=>console.log('connection successs')).catch((err)=>console.log("Error while connectiing to mongdb"))
@@ -9,6 +10,9 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>console.log('connection succe
 const PORT = process.env.PORT ?? 3000;
 const app = express()
 
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use('/', userRouter)
 
 // listing to port

@@ -4,9 +4,11 @@ import { useState } from 'react';
 import {useDispatch} from 'react-redux'
 import {setToken} from '../../store/slices/authSlice'
 import {setUser as setUserSlice} from '../../store/slices/userSlice'
+import { useNavigate } from 'react-router-dom';
 function Signup() {
     const [user, setUser] = useState({username:'',email:'',password:'',image:null});
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const handleDataChange = (e)=>{
         const key = e.target.name;
         if(key === 'image'){
@@ -21,6 +23,7 @@ function Signup() {
         const response =await axios.post('/signup', user)
         dispatch(setToken(response.data.token))
         dispatch(setUserSlice(response.data.user))
+        navigate('/')
       }catch(err){
         console.log(err)
       }

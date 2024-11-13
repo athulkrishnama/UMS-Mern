@@ -4,7 +4,7 @@ const createUser = (req,res)=>{
         const {username , password, email} = req.body
         console.log(req.body)
         const token = jwt.sign({username,password}, process.env.TOKEN_SECRET)
-        res.json({token})
+        res.json({token,user:{username,email}})
         }catch(err){
         console.log(err)
     }

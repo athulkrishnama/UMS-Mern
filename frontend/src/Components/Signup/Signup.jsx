@@ -7,6 +7,7 @@ import {setUser as setUserSlice} from '../../store/slices/userSlice'
 import { useNavigate } from 'react-router-dom';
 function Signup() {
     const [user, setUser] = useState({username:'',email:'',password:'',image:null});
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleDataChange = (e)=>{
@@ -21,6 +22,10 @@ function Signup() {
       e.preventDefault();
       try{
         const response =await axios.post('/signup', user)
+        if(response.data.err){
+          console.log(response.data.err)
+          return setError(response.data.err)
+        }
         dispatch(setToken(response.data.token))
         dispatch(setUserSlice(response.data.user))
         navigate('/')
@@ -38,6 +43,7 @@ function Signup() {
             <input type="password" name='password'  onChange={handleDataChange} value={user.password}/>
             {user.image&&<img src={user.image} alt=""/>}
             <input type="file" name='image' onChange={handleDataChange} />
+            <p >{error}</p>
             <button type='submit'>SignUp</button>
         </form>
       </div>

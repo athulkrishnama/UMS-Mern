@@ -17,7 +17,7 @@ function AdminHome() {
     <div>
       {
       users.length?<table>
-        {users.map((item,index)=><tr>
+        {users.map((item,index)=><tr key={index}>
             <td>{item.username}</td>
             <td>{item.email}</td>
             <td>edit</td>

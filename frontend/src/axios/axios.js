@@ -15,4 +15,9 @@ instance.interceptors.request.use(config=>{
     Promise.reject(err);
 })
 
+const adminInstance = axios.create({
+    baseURL:'http://localhost:4000/admin'
+})
+
+export {adminInstance}
 export default instance;

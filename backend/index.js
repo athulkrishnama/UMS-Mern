@@ -1,6 +1,7 @@
 const express = require('express')
 require ('dotenv').config()
-const userRouter = require('./routes/userRoute');
+const userRouter = require('./routes/userRouter');
+const adminRouter = require('./routes/adminRoute');
 const mongoose = require('mongoose');
 const cors = require('cors')
 
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/', userRouter)
+app.use('/admin', adminRouter)
 
 // listing to port
 app.listen((PORT), () => {

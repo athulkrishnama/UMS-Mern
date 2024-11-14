@@ -42,7 +42,7 @@ const login = async(req,res)=>{
         const passwordMatch = await bcrypt.compare(password, user.password)
         if(passwordMatch){
             const token = jwt.sign({username:user.username, email}, process.env.TOKEN_SECRET)
-            res.json({token,user:{username:user.username, email:email, id:user._id}});
+            res.json({token,user:{username:user.username, email:email, id:user._id,image:user.imageUrl}});
         }else{
             res.json({err:"password not matching"})
         }

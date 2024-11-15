@@ -5,5 +5,7 @@ const auth = require('../middlewares/adminAuth')
 
 adminRouter.post('/login', adminController.login);
 adminRouter.get('/getUsers',auth.tokenChecker,adminController.getUsers)
+adminRouter.post('/deleteUser', auth.tokenChecker, adminController.deleteUser)
+adminRouter.post('/updateUser', auth.tokenChecker, adminController.updateUser)
 
 module.exports = adminRouter;

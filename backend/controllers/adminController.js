@@ -14,11 +14,32 @@ const login = (req,res)=>{
 const getUsers = async(req,res)=>{
     try{
         const users =await User.find();
-        console.log(users)
         res.status(200).json({users})
     }catch(error){
         console.log(error)
     }
 }
 
-module.exports = {login, getUsers}
+const deleteUser = async (req,res)=>{
+    try{
+        const id = req.body.id
+        await User.findByIdAndDelete(id)
+        const users =await User.find();
+        res.status(200).json({users})
+        console.log(users)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+const updateUser = async (req,res)=>{
+    try{
+        const {username, email, imageUrl, id} = req.body;
+        await User.findByIdAndUpdate(id,{username,email,imageUrl})
+        res.status(200).json({message:"successfull updated"})
+    }catch(err){
+        res.status(400).json({error:"error occured"})
+    }
+}
+
+module.exports = {login, getUsers, deleteUser, updateUser}

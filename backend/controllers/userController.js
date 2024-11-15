@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
     const userCredentials = await user.save()
     console.log(userCredentials)
     const token = jwt.sign({ username, email }, process.env.TOKEN_SECRET);
-    res.json({ token, user: { username, email, id:userCredentials._id } });
+    res.json({ token, user: { username, email, id:userCredentials._id, image:userCredentials.imageUrl } });
   } catch (err) {
     if(err.errorResponse.code === 11000){
        return res.json({err:"already existing credentials"})

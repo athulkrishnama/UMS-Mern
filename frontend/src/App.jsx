@@ -7,6 +7,7 @@ import Login from "./Components/Login/Login";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
 import AdminHome from "./Components/AdminHome/AdminHome";
+import EditUser from './Components/EditUser/EditUser'
 function App() {
   const router = createBrowserRouter([
     {
@@ -33,6 +34,9 @@ function App() {
     {
       path:"/admin/login",
       element:<AdminLogin/>
+    },{
+      path:'/admin/edit',
+      element:<EditUser/>
     }
   ]);
   return (

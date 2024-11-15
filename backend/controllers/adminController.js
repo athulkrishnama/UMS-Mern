@@ -42,4 +42,19 @@ const updateUser = async (req,res)=>{
     }
 }
 
-module.exports = {login, getUsers, deleteUser, updateUser}
+const search = async(req, res)=>{
+    try{
+        const search = req.body.search
+        const searchQuery = new RegExp(search);
+        const result = await User.find({$or:[
+            {username:{$regex:searchQuery}},
+            {email:{$regex:searchQuery}}
+        ]
+        })
+        res.json({users:result})
+    }catch(err){
+        console.log(err)
+    }
+}
+
+module.exports = {login, getUsers, deleteUser, updateUser, search}

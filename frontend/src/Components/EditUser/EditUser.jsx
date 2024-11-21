@@ -123,7 +123,6 @@ function EditUser() {
        
       "
                   name="image"
-                  required
                   onChange={handleDataChange}
                 />
               </label>

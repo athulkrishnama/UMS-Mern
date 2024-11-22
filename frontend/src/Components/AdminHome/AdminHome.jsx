@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { adminInstance } from "../../axios/axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import { setUser } from "../../store/slices/editUserSlice";
+import { open } from "../../store/slices/addUserSlice";
+import AddUser from "./AddUser";
 function AdminHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+
+  const modalState = useSelector(state => state.addUser.open)
+  console.log(modalState)
   useEffect(() => {
     adminInstance("/getUsers")
       .then((data) => {
@@ -45,10 +50,15 @@ function AdminHome() {
   };
   return (
     <>
-      <nav className="text-center font-sans font-bold text-5xl p-10">Admin Page</nav>
+      <nav className="text-center font-sans font-bold text-5xl p-10">
+        Admin Page
+      </nav>
       <div className="w-full  px-20 bg-white shadow-lg rounded-sm border border-gray-200">
-        <header className="px-5 py-4 border-b border-gray-100">
+        <header className="px-5 py-4 border-b border-gray-100 flex justify-between">
           <h2 className="font-semibold text-gray-800">Customers</h2>
+          <button onClick={()=>dispatch(open())} className="bg-black hover:bg-gray-800 text-white font-bold py-1 px-4 rounded">
+            Add User
+          </button>
         </header>
         <div className="px-5">
           <div className="relative">
@@ -56,7 +66,7 @@ function AdminHome() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-              placeholder="UI Kits, Dashboards..."
+              placeholder="Search Users"
             />
             <button
               onClick={handleSearch}
@@ -165,6 +175,7 @@ function AdminHome() {
           </div>
         </div>
       </div>
+      {modalState && <AddUser/>}
     </>
   );
 }

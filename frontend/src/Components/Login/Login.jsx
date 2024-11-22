@@ -30,15 +30,7 @@ function Login() {
     }
   };
   return (
-    // <div>
-    //     <h1>Login</h1>
-    //     <form onSubmit={handleSubmit}>
-    //       <input type="text" name='email' onChange={handleDataChange} value={user.email}/>
-    //       <input type="password" name='password' onChange={handleDataChange} value={user.password} />
-    //       <p>{error}</p>
-    //       <button type='submit'>Login</button>
-    // </form>
-    // </div>
+
     <div className="h-[100vh]">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
